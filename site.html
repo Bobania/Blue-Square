@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href="style.css" rel="stylesheet"> 
+    <title>Blue Square</title>
+
+    
+</head>
+<body>
+    
+    
+     <h1>Blue Square</h1>
+    
+     <div class="score-container">
+        <span id="pointsPerClickDisplay">Клик: 1</span>
+         <div id="score">Score: 0</div>
+        <img src="https://cdn3.iconfinder.com/data/icons/business-and-finnance/60/coins-1024.png" alt="Icon" id="scoreIcon">
+        
+    </div>
+    <div class="container">
+        <img src="egg.png" alt="Яйцо" id="eggImage" >
+        <div id="heart" style="display: none; position: absolute; width: 50px; height: 50px;">
+    <img src="icons/redheart.png" alt="Heart" style="width: 100%; height: 100%;">
+</div>
+        <div class="square"></div>
+        
+        <div class="shop">
+ 
+            <button id="shopButton" class="shop-button">
+    <img src="icons/blackheart.png" alt="Shop Item" class="shop-image" id="shopImage">
+</button>
+    <div class="shop-price" id="shopPriceDisplay">1000 ОЧ.</div>
+</div>
+    </div>
+    
+    <div class="button-panel">
+           <button id="switchColorButton">Смена цвета</button>
+        <button id="upgradeButton">+1 Клик (20 ОЧ.)</button>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="scriptpupgrade.js"></script>
+</body>
+</html>
+
