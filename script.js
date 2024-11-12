@@ -4,15 +4,23 @@ const scoreDisplay = document.getElementById('score');
 const upgradeButton = document.getElementById('upgradeButton');
 const shopImage = document.getElementById('shopImage');
 
-const eggImage = document.getElementById('eggImage'); // Получаем элемент яйца
+const eggImage = document.getElementById('eggImage'); //  яйцo
 const heart = document.getElementById('heart');
+const addPointsButton = document.getElementById('addPointsButton');
+const shopButton = document.getElementById('shopButton');
+const autoButton = document.getElementById('autoButton');
 
 let colorChangeEnabled = false;
 let heartButtonPurchased = false;
 let score = 0;
 let pointsPerClick = 1; // Очки за клик
 let upgradeCost = 20; // Начальная стоимость улучшения
-let shopPrice = 1000;
+let shopPrice = 500; // Стоимость кнопки love
+let addPointsCost = 300; // Стоимость кнопки +5
+let pointsPerClickIncreaseFive = 5; // Увеличение очков за клик
+
+let autoEnabled = false; // Переменная для отслеживания, активирована ли автоматическая функция
+let autoCost = 750; // Стоимость автоматической функции
 
 function updateScoreDisplay() {
     scoreDisplay.innerText = `Score: ${score}`;
@@ -58,7 +66,7 @@ upgradeButton.addEventListener('click', function() {
     }
 });
 
-const shopButton = document.getElementById('shopButton');
+
 
 shopButton.addEventListener('click', () => {
     if (score >= shopPrice) { // Проверяем, достаточно ли очков для покупки
@@ -95,6 +103,43 @@ eggImage.addEventListener('click', (event) => {
    
 });;
 
+addPointsButton.addEventListener('click', () => {
+    if (score >= addPointsCost) { // Проверяем, достаточно ли очков для покупки
+        score -= addPointsCost; // Уменьшаем счет на стоимость покупки
+        pointsPerClick += pointsPerClickIncreaseFive; // Увеличиваем очки за клик
+        addPointsCost = 0; // Увеличиваем стоимость следующей покупки
+        updateScoreDisplay(); // Обновляем отображение счета
+        pointsPerClickIncreaseFive = 0;
+        addPointsButton.style.backgroundColor = '#822127';
+        addPointsButton.disabled = true;
+        document.getElementById('addPointsPriceDisplay').innerText = `${addPointsCost} ОЧ.`; // Обновляем стоимость
+    } else {
+        alert('Недостаточно очков для покупки!'); // Уведомление о недостатке очков
+    }
+});
+
+autoButton.addEventListener('click', () => {
+    if (score >= autoCost) { // Проверяем, достаточно ли очков для покупки
+        score -= autoCost; // Уменьшаем счет на стоимость покупки
+        autoEnabled = true; // Активируем автоматическую функцию
+        updateScoreDisplay(); // Обновляем отображение счета
+        autoCost = 0;
+        autoButton.disabled = true;
+        autoButton.style.backgroundColor = '#822127';
+        document.getElementById('autoButtonPriceDisplay').innerText = `${autoCost} ОЧ.`;
+        // Запускаем автоматическое добавление очков каждые 3 секунды
+        
+        setInterval(() => {
+            if (autoEnabled) {
+                score += pointsPerClick; // Увеличиваем счет на количество очков за клик
+                updateScoreDisplay(); // Обновляем отображение счета
+            }
+        }, 1500); // 1000 миллисекунд = 1 сек
+    } else {
+        alert('Недостаточно очков для покупки!'); // Уведомление о недостатке очков
+    }
+});
+
 function showHeart(x, y) {
     heart.style.display = 'block'; // Показываем сердечко
     heart.style.left = `${x - 25}px`; // Позиционируем сердечко по X
@@ -109,3 +154,6 @@ function showHeart(x, y) {
         heart.classList.remove('fade-out'); // Удаляем класс для следующего показа
     }, 1000);
 }
+
+
+

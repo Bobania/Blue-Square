@@ -62,6 +62,7 @@ margin-bottom: 0px; /* Отступ снизу для расстояния до 
     cursor: pointer;
     position: absolute; 
     right: calc(50% - 600px);
+    
 }
 .shop-button {
     width: 120px; /* Ширина кнопки */
@@ -69,6 +70,15 @@ margin-bottom: 0px; /* Отступ снизу для расстояния до 
     border: none;
      /* background-color: transparent; Прозрачный фон */
     cursor: pointer;
+    
+  
+}
+#autoButton {
+    font-size: 32px;
+    
+}
+#addPointsButton {
+font-size: 60px;
 }
 .shop-image {
     width: 100%; /* Заполняем кнопку изображением */
@@ -76,8 +86,9 @@ margin-bottom: 0px; /* Отступ снизу для расстояния до 
 }
 .shop-price {
     font-family: 'Press Start 2P', cursive;
-    margin-top: 10px; /* Отступ сверху для цены */
+    margin-top: 5px; /* Отступ сверху для цены */
     font-size: 16px; /* Размер шрифта для цены */
+    margin-bottom: 10px;
 }
 
 #eggImage {
