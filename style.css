@@ -17,9 +17,12 @@
             margin-top: 20px; /* Отступ сверху */
             margin-bottom: 50px; /* Отступ между заголовком и квадратом */
     }
+/* Полоска */
+
     .container {
     display: flex; /* Используем flexbox для расположения квадрата */
     align-items: center; /* Вертикальное центрирование */
+
     }
 
         .square {
@@ -37,6 +40,7 @@
             margin-bottom: 20px; /* Отступ снизу для расстояния до квадрата */
             
         }
+
 #scoreIcon {
     width: 40px; /* Устанавливаем ширину изображения */
     height: 40px; /* Устанавливаем высоту изображения */
@@ -49,11 +53,47 @@ margin-bottom: 0px; /* Отступ снизу для расстояния до 
     margin-right: 20px
 }
 
-.heart {
+#heart {
     display: none;
     position: absolute;
     width: 50px;
     height: 50px;
+}
+
+
+.egg-status {
+    display: flex;
+    flex-direction: column;
+    position: absolute; /* Абсолютное позиционирование для яйца */
+    left: calc(50% - 750px);
+
+
+}
+
+.progress-container {
+    display: none;
+
+    left: 50%;
+    width: 300px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+.progress-bar {
+    height: 100%; /* Высота полосы заполнения */
+    width: 0%;
+    background-color: red; /* Цвет заполнения */
+    transition: width 0.5s; /* Плавный переход при изменении ширины */
+}
+
+.progress-bar2 {
+    height: 100%; /* Высота полосы заполнения */
+    width: 0%;
+    background-color: #FFD700; /* Цвет заполнения */
+    transition: width 0.5s; /* Плавный переход при изменении ширины */
 }
 .shop {
         display: flex;
@@ -95,10 +135,11 @@ font-size: 60px;
     display: none;
     width: 300px; /* Устанавливаем ширину изображения яйца */
     height: 300px; /* Устанавливаем высоту изображения яйца */
-    position: absolute; /* Абсолютное позиционирование для яйца */
-    left: calc(50% - 750px); /* Смещаем яйцо влево от центра */
+ /* Смещаем яйцо влево от центра */
     cursor: pointer;
+    
 }
+
 
     #score {
 font-size: 32px; /* Размер шрифта для счета */

@@ -4,11 +4,17 @@ const scoreDisplay = document.getElementById('score');
 const upgradeButton = document.getElementById('upgradeButton');
 const shopImage = document.getElementById('shopImage');
 
-const eggImage = document.getElementById('eggImage'); //  яйцo
+
 const heart = document.getElementById('heart');
 const addPointsButton = document.getElementById('addPointsButton');
 const shopButton = document.getElementById('shopButton');
 const autoButton = document.getElementById('autoButton');
+
+const eggImage = document.getElementById('eggImage'); //  яйцo
+const heartProgressBar = document.getElementById('progressBar1'); // Предположим, что это первый прогресс-бар
+const progressBar2 = document.getElementById('progressBar2');
+const progressContainer = document.getElementById('progressLove');
+const progressContainer2 = document.getElementById('progressWarm');
 
 let colorChangeEnabled = false;
 let heartButtonPurchased = false;
@@ -19,17 +25,31 @@ let shopPrice = 500; // Стоимость кнопки love
 let addPointsCost = 300; // Стоимость кнопки +5
 let pointsPerClickIncreaseFive = 5; // Увеличение очков за клик
 
+let heartProgress = 0; // Текущий прогресс
+const heartGoal = 500; // Цель прогресса (500 нажатий)
+
 let autoEnabled = false; // Переменная для отслеживания, активирована ли автоматическая функция
 let autoCost = 750; // Стоимость автоматической функции
+heartProgressBar.style.width = '0%';
+progressBar2.style.width = '0%';
+
+
 
 function updateScoreDisplay() {
     scoreDisplay.innerText = `Score: ${score}`;
     pointsPerClickDisplay.innerText = `Клик: ${pointsPerClick}`;
     if (score >= 100) {
         document.getElementById('eggImage').style.display = 'block'; // Показываем изображение яйца
+        
+        progressContainer.style.display = 'block';
+        progressContainer2.style.display = 'block';
+        
     }
     updateUpgradeButton(); // Обновляем текст на кнопке улучшения
 }
+
+
+
 
 function updateUpgradeButton() {
     upgradeButton.innerText = `+1 Клик (${upgradeCost} ОЧ.)`; // Обновляем текст на кнопке улучшения
@@ -98,10 +118,30 @@ switchColorButton.addEventListener('click', () => {
 });
 eggImage.addEventListener('click', (event) => {
     if (heartButtonPurchased) { // Проверяем, была ли куплена кнопка
-        showHeart(event.clientX, event.clientY); // Показываем сердечко в месте нажатия
+        showHeart(event.clientX, event.clientY);
+        heartProgress++; // Увеличиваем прогресс нажатий
+        updateHeartProgress();// Показываем сердечко в месте нажатия
     }  // Уведомление, если кнопка не куплена
    
 });;
+
+
+function updateHeartProgress() {
+    
+    const progressPercentage = (heartProgress / heartGoal) * 100; // Рассчитываем процент заполнения
+    heartProgressBar.style.width = `${progressPercentage}%`; // Обновляем ширину прогресс-бара
+
+    // Проверяем, достигли ли мы цели
+    if (heartProgress >= heartGoal) {
+        alert('Сердечко заполнено!'); // Уведомление о достижении цели
+        heartProgress = 0; // Сбрасываем прогресс
+        heartProgressBar.style.width = '0%'; // Сбрасываем ширину прогресс-бара
+    }
+}
+
+eggImage.addEventListener('mousedown', (event) => {
+    event.preventDefault(); // Предотвращаем стандартное поведение перетаскивания
+});
 
 addPointsButton.addEventListener('click', () => {
     if (score >= addPointsCost) { // Проверяем, достаточно ли очков для покупки
@@ -131,8 +171,9 @@ autoButton.addEventListener('click', () => {
         
         setInterval(() => {
             if (autoEnabled) {
-                score += pointsPerClick; // Увеличиваем счет на количество очков за клик
-                updateScoreDisplay(); // Обновляем отображение счета
+                score += pointsPerClick;// Увеличиваем счет на количество очков за клик
+                shakeSquare();
+                updateScoreDisplay();                 // Обновляем отображение счета
             }
         }, 1500); // 1000 миллисекунд = 1 сек
     } else {
@@ -154,6 +195,8 @@ function showHeart(x, y) {
         heart.classList.remove('fade-out'); // Удаляем класс для следующего показа
     }, 1000);
 }
+
+
 
 
 
